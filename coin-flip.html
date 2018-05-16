@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Coin Flip Simulator!</title>
+	<!-- link to stylesheet -->
+	<link rel="stylesheet" type="text/css" href="style.css">	
+</head>
+<body>
+	<h2>Coin Flip Simulator</h2> 
+	<img src="https://vignette.wikia.nocookie.net/glee/images/d/d5/281735_1342370254-coin-flip.gif.gif/revision/latest?cb=20130929223343" alt="Stick figure flipping a coin that engulfs him.">
+	<p>We just flipped some coins.</p>
+	<p>Open up the inspector go to console for your coin flips fun!</p>
+
+	<script>
+		// Write a flip() function that flips a coin and returns heads or tails based on a random number.
+		const flip = () => {
+			// generate a random nuber that is either 0 or 1
+			const randomNumber = Math.floor(Math.random() * 2);
+			if (randomNumber === 1) {
+				// 1 means heads
+				return "heads";
+			} else {
+				// 0 means tails
+				return "tails";
+			}
+		}
+
+		// Write a function flipMany() that calls flip() 100 times. Recording the results of heads and tails.
+		let recordHighHeads = 0;
+		let recordLowHeads = 100;
+		let recordHighTails = 0;
+		let recordLowTails = 100;
+
+		const flipMany = () => {
+			let heads = 0;
+			let tails = 0;
+
+			// call flip() 100 times 
+			for (let i = 0; i < 100; i++) {
+				if (flip() === "heads") {
+					heads++;
+				} else {
+					tails++;
+				}
+			}
+
+			// If there are record highs or record lows for each flip group. For example, 30 heads or 70 tails, record them as the the current highs/lows.
+			if (heads > recordHighHeads) {
+				recordHighHeads = heads;
+			} 
+			if (heads < recordLowHeads) {
+				recordLowHeads = heads;
+			}
+			if (tails > recordHighTails) {
+				recordHighTails = tails;
+			}
+			if (tails < recordLowTails) {
+				recordLowTails = tails;
+			}
+		}
+
+
+		// Program Start
+		let userInput = prompt(`How many times would you like to flip 100 coins? 
+			\n (I'm gonna flip it 100,000 times if you leave this blank! (づ｡◕‿‿◕｡)づ)`);
+
+		const flipManyGroups = (flipTimes=100000) => {
+			// Show total number of coin flips
+			console.log(`You flipped coins a total of: `);
+			console.log(`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧   ${flipTimes * 100} times  ﾟ✧･: *ヽ(◕ヮ◕ヽ)`);
+			for (let i = 0; i < flipTimes; i++) {
+				flipMany();
+			}
+		}
+
+		// If user did not enter a number above 0 just flip 100000 times
+		if (userInput > 0) {
+			flipManyGroups(userInput);
+		} else {
+			flipManyGroups();
+		}
+
+		// Show the record high and lows
+		console.log(`Record High Heads: ${recordHighHeads}, Record Low Heads: ${recordLowHeads}`);
+		console.log(`Record High Tails: ${recordHighTails}, Record Low Tails: ${recordLowTails}`);
+	</script>	
+</body>
+</html>
