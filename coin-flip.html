@@ -5,15 +5,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Coin Flip Simulator!</title>
+	<!-- link to favicon -->
+	<link rel="shortcut icon" href="coin-favicon.png" />
 	<!-- link to stylesheet -->
 	<link rel="stylesheet" type="text/css" href="style.css">	
 </head>
 <body>
-	<h2>Coin Flip Simulator</h2> 
-	<img src="https://vignette.wikia.nocookie.net/glee/images/d/d5/281735_1342370254-coin-flip.gif.gif/revision/latest?cb=20130929223343" alt="Stick figure flipping a coin that engulfs him.">
-	<p>We just flipped some coins.</p>
-	<p>Open up the inspector go to console for your coin flips fun!</p>
+	<header>
+		<h1>Coin Flip Simulator</h1> 
+		<img src="coin.jpg" alt="Stick figure flipping a coin that engulfs him.">
+	</header>
 
+
+	<div class="flip-container">
+		<h2>Flip Stats: </h2>
+		<h4 class="you-flipped">You flipped coins a total of: <span class="flip-guy1">(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ </span>  <span id="total-flips">0 times</span><span class="flip-guy2"> ﾟ✧･: *ヽ(◕ヮ◕ヽ)</span></h4>
+		<p id="warning-message">You did not enter a number greater than 0 so I'm flipping the coins 10000000 times!</p>
+		<p>Record High Heads: <span id="high-heads" class="num">0</span></p>
+		<p>Record Low Heads: <span id="low-heads" class="num">0</span></p>
+		<p>Record High Tails: <span id="high-tails" class="num">0</span></p>
+		<p>Record Low Tails: <span id="low-tails" class="num">0</span></p>
+	</div>
+
+	<!-- link to jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		// Write a flip() function that flips a coin and returns heads or tails based on a random number.
 		const flip = () => {
@@ -63,7 +78,7 @@
 		}
 
 
-		// Program Start
+		// Ask user for input to START flipping!
 		let userInput = prompt(`How many times would you like to flip 100 coins? 
 			\n (I'm gonna flip it 100,000 times if you leave this blank! (づ｡◕‿‿◕｡)づ)`);
 
@@ -71,21 +86,27 @@
 			// Show total number of coin flips
 			console.log(`You flipped coins a total of: `);
 			console.log(`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧   ${flipTimes * 100} times  ﾟ✧･: *ヽ(◕ヮ◕ヽ)`);
+			$("#total-flips").text(flipTimes*100 + " times");
 			for (let i = 0; i < flipTimes; i++) {
 				flipMany();
 			}
 		}
 
-		// If user did not enter a number above 0 just flip 100000 times
 		if (userInput > 0) {
 			flipManyGroups(userInput);
 		} else {
+			// If user did not enter a number above 0 just flip 100000 times
+			$("#warning-message").show();
 			flipManyGroups();
 		}
 
 		// Show the record high and lows
 		console.log(`Record High Heads: ${recordHighHeads}, Record Low Heads: ${recordLowHeads}`);
+		$("#high-heads").text(recordHighHeads);
+		$("#low-heads").text(recordLowHeads);
 		console.log(`Record High Tails: ${recordHighTails}, Record Low Tails: ${recordLowTails}`);
+		$("#high-tails").text(recordHighTails);
+		$("#low-tails").text(recordLowTails);
 	</script>	
 </body>
 </html>
