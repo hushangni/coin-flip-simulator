@@ -36,6 +36,16 @@ h1 {
 	margin: 0 auto;
 	padding: 30px;
 	font-weight: 400;
+	border: 2px solid lightgrey;
+}
+
+.play-again {
+	width: 80px;
+	font-size: 1.3em;
+	display: block;
+	grid-column: 1/3;
+	margin: 0 auto;
+	margin-top: 20px;
 }
 
 h2 {
